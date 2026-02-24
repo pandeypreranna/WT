@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phone Style Calculator</title>
+    <style>
+        body {
+            background: linear-gradient(135deg,  #1c1c1c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .phone {
+            background: #111;
+            width: 300px;
+            padding: 20px;
+            border-radius: 40px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.6);
+        }
+
+        .display {
+            background: #000;
+            color: #f9fafa;
+            font-size: 28px;
+            text-align: right;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        button {
+            height: 60px;
+            font-size: 20px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        .number {
+            background: #2d2d2d;
+            color: white;
+        }
+
+        .operator {
+            background: #ff9500;
+            color: white;
+        }
+
+        .equal {
+            background: #ff9500;
+            color: white;
+            grid-column: span 2;
+            border-radius: 40px;
+        }
+
+        .clear {
+            background: #ff9500;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone">
+    <div id="display" class="display">0</div>
+
+    <div class="buttons">
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button class="operator" onclick="appendValue('/')">÷</button>
+        <button class="operator" onclick="appendValue('*')">×</button>
+        <button class="operator" onclick="appendValue('-')">−</button>
+
+        <button class="number" onclick="appendValue('7')">7</button>
+        <button class="number" onclick="appendValue('8')">8</button>
+        <button class="number" onclick="appendValue('9')">9</button>
+        <button class="operator" onclick="appendValue('+')">+</button>
+
+        <button class="number" onclick="appendValue('4')">4</button>
+        <button class="number" onclick="appendValue('5')">5</button>
+        <button class="number" onclick="appendValue('6')">6</button>
+        <button class="number" onclick="appendValue('.')">.</button>
+
+        <button class="number" onclick="appendValue('1')">1</button>
+        <button class="number" onclick="appendValue('2')">2</button>
+        <button class="number" onclick="appendValue('3')">3</button>
+        <button class="number" onclick="appendValue('0')">0</button>
+
+        <button class="equal" onclick="calculate()">=</button>
+    </div>
+</div>
+
+<script>
+    function appendValue(value) {
+        let display = document.getElementById("display");
+        if (display.innerText === "0") {
+            display.innerText = value;
+        } else {
+            display.innerText += value;
+        }
+    }
+
+    function clearDisplay() {
+        document.getElementById("display").innerText = "0";
+    }
+
+    function calculate() {
+        try {
+            let result = eval(document.getElementById("display").innerText);
+            document.getElementById("display").innerText = result;
+        } catch {
+            document.getElementById("display").innerText = "Error";
+        }
+    }
+</script>
+
+</body>
+</html>

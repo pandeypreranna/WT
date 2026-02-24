@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Times New Roman;
+            margin: 40px;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        input {
+            width: 200px;
+            height: 25px;
+            margin-right: 10px;
+        }
+
+        button {
+            margin-top: 10px;
+            margin-right: 5px;
+            width: 35px;
+            height: 30px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>SIMPLE CALCULATOR</h1>
+
+<input type="number" id="num1">
+<input type="number" id="num2">
+
+<br><br>
+
+<button onclick="calculate('+')">+</button>
+<button onclick="calculate('-')">-</button>
+<button onclick="calculate('*')">*</button>
+<button onclick="calculate('/')">/</button>
+<button onclick="calculate('%')">%</button>
+
+<div id="result">
+    Result: 
+</div>
+
+<script>
+function calculate(operator) {
+    var n1 = parseFloat(document.getElementById("num1").value);
+    var n2 = parseFloat(document.getElementById("num2").value);
+    var res;
+
+    if (operator == "+") res = n1 + n2;
+    if (operator == "-") res = n1 - n2;
+    if (operator == "*") res = n1 * n2;
+    if (operator == "/") res = n1 / n2;
+    if (operator == "%") res = n1 % n2;
+
+    document.getElementById("result").innerHTML = "Result: " + res;
+}
+</script>
+
+</body>
+</html>
