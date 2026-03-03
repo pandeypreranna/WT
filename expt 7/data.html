@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stored Data</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Stored Student Data</h2>
+
+<table id="dataTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Course</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<button onclick="copyData()">Copy Data</button>
+<button onclick="downloadCSV()">Download CSV</button>
+
+<script>
+let students = JSON.parse(localStorage.getItem("students")) || [];
+let tableBody = document.querySelector("#dataTable tbody");
+
+students.forEach(student => {
+    let row = `<tr>
+        <td>${student.name}</td>
+        <td>${student.email}</td>
+        <td>${student.course}</td>
+    </tr>`;
+    tableBody.innerHTML += row;
+});
+
+function copyData() {
+    let text = "Name, Email, Course\n";
+    students.forEach(s => {
+        text += `${s.name}, ${s.email}, ${s.course}\n`;
+    });
+
+    navigator.clipboard.writeText(text);
+    alert("Data copied to clipboard!");
+}
+
+function downloadCSV() {
+    let csv = "Name,Email,Course\n";
+    students.forEach(s => {
+        csv += `${s.name},${s.email},${s.course}\n`;
+    });
+
+    let blob = new Blob([csv], { type: "text/csv" });
+    let url = URL.createObjectURL(blob);
+    let a = document.createElement("a");
+    a.href = url;
+    a.download = "students.csv";
+    a.click();
+}
+</script>
+
+</body>
+</html>
